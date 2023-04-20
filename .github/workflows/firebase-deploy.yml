@@ -13,6 +13,7 @@ jobs:
       uses: actions/setup-node@v2-beta
       with:
         node-version: '>=16.4.0' # or '16'
+        check-latest: true
     - name: Install Dependencies
       run: npm install
     - name: Firebase Login
