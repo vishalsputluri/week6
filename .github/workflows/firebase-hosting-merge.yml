@@ -26,9 +26,12 @@ jobs:
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
+      - name: Disable Angular CLI version mismatch warnings
+        run: ng config -g cli.warnings.versionMismatch false
+        
 
-      - name: Build
-        run: ng build --prod
+      #- name: Build
+      #  run: ng build --prod
       - name: serve
         run: ng serve -o
 
