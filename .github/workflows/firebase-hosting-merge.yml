@@ -32,8 +32,8 @@ jobs:
 
       #- name: Build
       #  run: ng build --prod
-      - name: serve
-        run: ng serve -o
+      #- name: serve
+      #  run: ng serve -o
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
