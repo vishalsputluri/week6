@@ -1,30 +1,21 @@
-name: Firebase Deploy
+name: Deploy to Master Channel
+
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    # Optionally configure to run only for specific files. For example:
+    # paths:
+    # - "website/**"
+
 jobs:
-  deploy:
+  build_and_preview:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Setup Node.js
-      uses: actions/setup-node@v2-beta
-      with:
-        node-version: '>=16.4.0' # or '16'
-        check-latest: true
-    - name: Install Dependencies
-      run: npm install
-    - name: Firebase Login
-      uses: w9jds/firebase-action@v1.3.0
-      with:
-        args: login:ci
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-    - name: Firebase Deploy
-      uses: w9jds/firebase-action@v1.3.0
-      with:
-        args: deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT }}
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - uses: actions/checkout@v2
+      # Add any build steps here. For example:
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          expires: 30d
+          projectId: w6project-85ff4
