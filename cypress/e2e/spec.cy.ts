@@ -20,8 +20,8 @@ describe('dashboard', () => {
     cy.get('app-hero-search').should('contain', 'Hero Search');
   });
 
-  it(`says hello from Matt`, () => {
-    cy.contains('Hello from Matt');
+  it(`says hello from Vishal`, () => {
+    cy.contains('Hello from Vishal');
   });
 
   it('can search', () => {
