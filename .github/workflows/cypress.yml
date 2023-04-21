@@ -13,15 +13,16 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           # Disable running of tests within install job
-          runTests: false
+          #runTests: false
           build: npm run build
+          start: npm start
 
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          if-no-files-found: error
-          path: build
+      #- name: Save build folder
+      #  uses: actions/upload-artifact@v3
+       # with:
+        #  name: build
+         # if-no-files-found: error
+         # path: build
 
   cypress-run:
     runs-on: ubuntu-22.04
@@ -30,14 +31,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: build
+      #- name: Download the build folder
+        #uses: actions/download-artifact@v3
+        #with:
+         # name: build
+         # path: build
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
           start: npm start
+          component: true
           browser: chrome
